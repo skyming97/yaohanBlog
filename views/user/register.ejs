@@ -53,8 +53,8 @@
         // 当取消了表单的默认提交行为之后，手动发起Ajax请求，提交表单
         $.ajax({
           url: '/register',
-          data: $('#form').serialize(),
           type: 'POST',
+          data: $("#form").serialize(),
           dataType: 'json',
           success: function (result) {
             if (result.status !== 200) {
