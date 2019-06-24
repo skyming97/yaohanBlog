@@ -41,8 +41,20 @@ module.exports = {
         conn.query(sql, [user.username, user.password], (err, result) => {
             if (err) return res.send({ msg: "登录失败", status: 502 })
             if (result.length != 1) return res.send({ msg: "登录查询失败", status: 503 })
+
+            // //将用户信息和是否登录的状态挂载到session身上
+            req.session.name = result[0].nickname
+            req.session.isLogin = true
+
             res.send({ msg: "登录成功", status: 200 })
         })
+    },
+    logout: (req, res) => {
+        req.session.destroy((err) => {
+            if (err) throw err;
+            console.log('用户退出成功！');
+            // 实现服务器端的跳转，这个对比于 客户端跳转
+            res.redirect('/');
+        });
     }
-
 }

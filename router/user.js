@@ -14,4 +14,7 @@ router.get("/login", ctrl.loginPage)
 //登录业务逻辑
 router.post("/login", ctrl.login)
 
+//=====注销登录
+router.get("/logout", ctrl.logout)
+
 module.exports = router
