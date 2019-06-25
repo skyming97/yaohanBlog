@@ -1,12 +1,18 @@
 const conn = require("../db/user.js")
 
 module.exports = {
+
+    //首页
     index: (req, res) => {
         res.render('index', {})
     },
+
+    //登录页
     registerPage: (req, res) => {
         res.render("./user/register.ejs")
     },
+
+    //登录功能
     register: (req, res) => {
         const user = req.body
         console.log(user);
@@ -32,9 +38,13 @@ module.exports = {
         })
 
     },
+
+    //登录页
     loginPage: (req, res) => {
         res.render("./user/login.ejs")
     },
+
+    //登录功能
     login: (req, res) => {
         const user = req.body
         const sql = 'select * from t_blog where username = ? and password = ?'
@@ -43,12 +53,14 @@ module.exports = {
             if (result.length != 1) return res.send({ msg: "登录查询失败", status: 503 })
 
             // //将用户信息和是否登录的状态挂载到session身上
-            req.session.name = result[0].nickname
+            req.session.user = result[0]
             req.session.isLogin = true
 
             res.send({ msg: "登录成功", status: 200 })
         })
     },
+
+    //注销功能
     logout: (req, res) => {
         req.session.destroy((err) => {
             if (err) throw err;
@@ -57,4 +69,5 @@ module.exports = {
             res.redirect('/');
         });
     }
+
 }
