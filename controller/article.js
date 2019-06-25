@@ -46,7 +46,8 @@ module.exports = {
         conn.query(sql, body, (err, result) => {
             if (err) return res.send({ status: 500, msg: "发表失败，数据库错误", err: err.message })
             if (result.affectedRows != 1) return res.send({ status: 501, msg: "发表失败" })
-            res.send({ status: 200, msg: "发表成功" })
+            console.log(result);
+            res.send({ status: 200, msg: "发表成功", insertId: result.insertId })
         })
     },
 

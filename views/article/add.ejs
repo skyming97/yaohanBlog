@@ -5,7 +5,7 @@
     <h1>发表文章页</h1>
     <hr>
     <form id="form">
-        <input id="articleId" type="hidden" name="authorId" value="<%= article.id %>">
+        <input id="articleId" type="hidden" name="authorId" value="<%= user.id %>">
         <div class="form-group">
             <label>文章标题：</label>
             <input type="text" name="title" class="form-control" required>
@@ -43,7 +43,7 @@
                 dataType: 'json',
                 success: (res) => {
                     if (res.status == 200)
-                        location.href = '/article/info/' + articleId
+                        location.href = '/article/info/' + res.insertId
                 }
             })
 
